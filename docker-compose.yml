@@ -6,8 +6,7 @@ services:
     container_name: fastapi-backend
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
+    volumes: []
     depends_on:
       - db
     environment:
@@ -22,6 +21,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+      - ./frontend:/node_modules
     depends_on:
       - backend
 

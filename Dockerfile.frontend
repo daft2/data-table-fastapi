@@ -1,14 +1,25 @@
-# Dockerfile.frontend
+# Use the official Node.js 18 image as the base image
 FROM node:18
 
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy only the package.json and lock file first to leverage Docker caching
 COPY frontend/package.json frontend/package-lock.json ./
-RUN npm install --legacy-peer-deps
 
+# Install dependencies using npm
+RUN npm ci --legacy-peer-deps
+
+RUN npm install -g pnpm
+
+# Copy the rest of the frontend source code
 COPY frontend/ .
 
+# Build the application
 RUN npm run build
 
+# Expose the port the app runs on
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+# Start the application
+CMD ["npm", "run", "dev"]

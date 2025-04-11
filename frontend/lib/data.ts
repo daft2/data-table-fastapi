@@ -1,6 +1,6 @@
 import type { Item, Category, Brand } from "./types";
 
-const API_BASE_URL = "http://backend:8000";
+const API_BASE_URL = "http://localhost:8000";
 
 // Fetch all items from the API
 export async function fetchItems(): Promise<Item[]> {

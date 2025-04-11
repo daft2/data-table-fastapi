@@ -13,8 +13,14 @@ categories = ['Electronics', 'Clothing', 'Home', 'Beauty', 'Toys', 'Books', 'Fit
 colors = ['Red', 'Blue', 'Green', 'Black', 'White', 'Gray', 'Yellow']
 
 def seed_products(n=100_000):
+    product_count = db.query(Product).count()
+    if product_count >= n:
+        print(f"✅ Database already contains {product_count} products. No seeding required.")
+        db.close()
+        return
+
     batch = []
-    for _ in range(n):
+    for _ in range(n - product_count):
         product = Product(
             sku=fake.unique.ean13(),
             name=fake.word().capitalize() + " " + fake.word().capitalize(),
@@ -37,7 +43,7 @@ def seed_products(n=100_000):
         db.commit()
 
     db.close()
-    print("✅ Seeded 100,000 products.")
+    print(f"✅ Seeded {n - product_count} products.")
 
 if __name__ == "__main__":
     seed_products()
