@@ -24,7 +24,7 @@ The application consists of three main components:
 1. Clone the repository
 2. Start all services:
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
 
 The services will be available at:
@@ -58,12 +58,12 @@ cd frontend
 
 2. Install dependencies:
 ```bash
-pnpm install
+npm install --legacy-peer-deps
 ```
 
 3. Run the development server:
 ```bash
-pnpm dev
+npm run dev
 ```
 
 ## Project Structure
